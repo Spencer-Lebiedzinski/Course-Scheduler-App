@@ -24,7 +24,7 @@ public class ClassQueries {
         connection = DBConnection.getConnection();
         try {
             addClass = connection.prepareStatement(
-                "INSERT INTO ClassEntry (semester, coursecode, seats) VALUES (?, ?, ?)"
+                "INSERT INTO Class (semester, coursecode, seats) VALUES (?, ?, ?)"
             );
             addClass.setString(1, classEntry.getSemester());
             addClass.setString(2, classEntry.getCourseCode());
@@ -42,7 +42,7 @@ public class ClassQueries {
         try {
             PreparedStatement getClasses = connection.prepareStatement(
                 "SELECT c.CourseCode, ce.Description, c.Seats " +
-                "FROM ClassEntry c JOIN CourseEntry ce ON c.CourseCode = ce.CourseCode " +
+                "FROM Class c JOIN Course ce ON c.CourseCode = ce.CourseCode " +
                 "WHERE c.Semester = ?"
             );
             getClasses.setString(1, semester);
@@ -68,7 +68,7 @@ public class ClassQueries {
     public static void dropClass(String semester, String courseCode) {
         connection = DBConnection.getConnection();
         try {
-            dropClass = connection.prepareStatement("DELETE FROM ClassEntry WHERE semester = ? AND coursecode = ?");
+            dropClass = connection.prepareStatement("DELETE FROM Class WHERE semester = ? AND coursecode = ?");
             dropClass.setString(1, semester);
             dropClass.setString(2, courseCode);
             dropClass.executeUpdate();

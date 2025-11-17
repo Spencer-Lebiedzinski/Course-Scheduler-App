@@ -18,6 +18,7 @@ public class DBConnection {
     private static final String user = "java";
     private static final String password = "java";
     private static final String database = "jdbc:derby://localhost:1527/CourseScedulerDBSpencersml7204";
+    private static final String clientDriver = "org.apache.derby.client.ClientAutoloadedDriver";
 
     public static Connection getConnection()
     {
@@ -25,7 +26,13 @@ public class DBConnection {
         {
             try
             {
+                Class.forName(clientDriver);
                 connection = DriverManager.getConnection(database, user, password);
+            } catch (ClassNotFoundException e)
+            {
+                e.printStackTrace();
+                System.out.println("Could not load Derby client driver.");
+                System.exit(1);
             } catch (SQLException e)
             {
                 e.printStackTrace();
