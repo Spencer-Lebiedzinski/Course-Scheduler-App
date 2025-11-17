@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class ClassQueries {
     private static Connection connection;
     private static PreparedStatement addClass;
-    private static PreparedStatement getAllClasses;
     private static PreparedStatement dropClass;
     private static ResultSet resultSet;
 
